@@ -1,8 +1,8 @@
 import telebot
 from datetime import datetime
 from telebot import types
-
-bot = telebot.TeleBot('1545334820:AAG-tkGJ3YJPC3vn8tFzD7Qw89Hkoatdtg0')
+#1545334820:AAG-tkGJ3YJPC3vn8tFzD7Qw89Hkoatdtg0
+bot = telebot.TeleBot('6794048903:AAFyW66Ds5y2LKUffVkr1Zr9zQXFI01-pWc')
 
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True)		#клавиатура
 keyboard1.row('/start', 'Записать Д/З', 'Узнать Д/З')
@@ -31,6 +31,11 @@ ENGLISH_2 = []	#Англ.яз (группа Марины Николаевны)
 def start_message(message):	 
 	bot.send_message(message.chat.id, 'Привет, {0.first_name}. Здесь можно узнавать и записывать Д/З'.format(message.from_user, bot.get_me()),
 	reply_markup=keyboard1)
+	print('{0.first_name}'.format(message.from_user, bot.get_me()))
+	if '{0.first_name}'.format(message.from_user, bot.get_me()) == 'psushaa':
+		bot.send_message(message.chat.id, 'Ксюша крутая!!')
+		bot.send_message(message.chat.id, 'Очень')
+		print('зашла', '{0.first_name}'.format(message.from_user, bot.get_me()))
 
 
 @bot.message_handler(content_types=['text','document', 'audio'])
@@ -50,16 +55,12 @@ def send_text(message):
 		item9 = types.InlineKeyboardButton("Обществознание", callback_data='OBSHEST_')
 		item10 = types.InlineKeyboardButton("Родной язык", callback_data='RODN_RUS_')
 		item11 = types.InlineKeyboardButton("Физика", callback_data='PHY_')
-		item12 = types.InlineKeyboardButton("Музыка", callback_data='MUS_')
-		item13 = types.InlineKeyboardButton("Изо", callback_data='ISO_')
 		item14 = types.InlineKeyboardButton("Информатика", callback_data='INFORM_')
 		item15 = types.InlineKeyboardButton("ОБЖ", callback_data='OBZH_')
-		item16 = types.InlineKeyboardButton("СК(математика)", callback_data='SK_MAT_')
-		item17 = types.InlineKeyboardButton("Технология", callback_data='TECHNOLOGY_')
-		item18 = types.InlineKeyboardButton("Англ.яз(группа Люсине Самвеловны)", callback_data='ENGLISH_1_')
-		item19 = types.InlineKeyboardButton("Англ.яз (группа Марины Николаевны)", callback_data='ENGLISH_2_')
+		item18 = types.InlineKeyboardButton("Англ.яз(группа Анны Александровны)", callback_data='ENGLISH_1_')
+		item19 = types.InlineKeyboardButton("Англ.яз (группа Светланы Александровны)", callback_data='ENGLISH_2_')
 		
-		markup.add(item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14, item15, item17, item18, item19)
+		markup.add(item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item14, item15, item18, item19)
 		
 		bot.send_message(message.chat.id, 'На какой урок ты хочешь записать ДЗ?', reply_markup=markup)
 
@@ -77,16 +78,12 @@ def send_text(message):
 		item9 = types.InlineKeyboardButton("Обществознание", callback_data='OBSHEST_know')
 		item10 = types.InlineKeyboardButton("Родной язык", callback_data='RODN_RUS_know')
 		item11 = types.InlineKeyboardButton("Физика", callback_data='PHY_know')
-		item12 = types.InlineKeyboardButton("Музыка", callback_data='MUS_know')
-		item13 = types.InlineKeyboardButton("Изо", callback_data='ISO_know')
 		item14 = types.InlineKeyboardButton("Информатика", callback_data='INFORM_know')
 		item15 = types.InlineKeyboardButton("ОБЖ", callback_data='OBZH_know')
-		item16 = types.InlineKeyboardButton("СК(математика)", callback_data='SK_MAT_know')
-		item17 = types.InlineKeyboardButton("Технология", callback_data='TECHNOLOGY_know')
-		item18 = types.InlineKeyboardButton("Англ.яз(группа Люсине Самвеловны)", callback_data='ENGLISH_1_know')
-		item19 = types.InlineKeyboardButton("Англ.яз (группа Марины Николаевны)", callback_data='ENGLISH_2_know')
+		item18 = types.InlineKeyboardButton("Англ.яз(группа Анны Александровны)", callback_data='ENGLISH_1_know')
+		item19 = types.InlineKeyboardButton("Англ.яз (группа Светлана Александровна)", callback_data='ENGLISH_2_know')
 		
-		markup.add(item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item12, item13, item14, item15, item17, item18, item19)
+		markup.add(item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11, item14, item15, item18, item19)
 
 		bot.send_message(message.chat.id, 'Домашнее задание какого урока ты хочешь узнать?', reply_markup=markup)
 
@@ -128,24 +125,12 @@ def callback_inline(call):
 			elif call.data == 'PHY_':
 				bot.send_message(call.message.chat.id, 'Запиши домашнее задание')
 				bot.register_next_step_handler(call.message, physic)
-			elif call.data == 'MUS_':
-				bot.send_message(call.message.chat.id, 'Запиши домашнее задание')
-				bot.register_next_step_handler(call.message, music)
-			elif call.data == 'ISO_':
-				bot.send_message(call.message.chat.id, 'Запиши домашнее задание')
-				bot.register_next_step_handler(call.message, iso)
 			elif call.data == 'INFORM_':
 				bot.send_message(call.message.chat.id, 'Запиши домашнее задание')
 				bot.register_next_step_handler(call.message, informatica)
 			elif call.data == 'OBZH_':
 				bot.send_message(call.message.chat.id, 'Запиши домашнее задание')
 				bot.register_next_step_handler(call.message, obzh)
-			elif call.data == 'SK_MAT_':
-				bot.send_message(call.message.chat.id, 'Запиши домашнее задание')
-				bot.register_next_step_handler(call.message, sk_mat)
-			elif call.data == 'TECHNOLOGY_':
-				bot.send_message(call.message.chat.id, 'Запиши домашнее задание')
-				bot.register_next_step_handler(call.message, TECHNOLOGY)
 			elif call.data == 'ENGLISH_1_':
 				bot.send_message(call.message.chat.id, 'Запиши домашнее задание')
 				bot.register_next_step_handler(call.message, english_1)
@@ -187,23 +172,11 @@ def callback_inline(call):
 			elif call.data == 'PHY_know':
 				for a in PHY:
 					bot.send_message(call.message.chat.id, a)
-			elif call.data == 'MUS_know':
-				for a in MUS:
-					bot.send_message(call.message.chat.id, a)
-			elif call.data == 'ISO_know':
-				for a in ISO:
-					bot.send_message(call.message.chat.id, a)
 			elif call.data == 'INFORM_know':
 				for a in INFORM:
 					bot.send_message(call.message.chat.id, a)
 			elif call.data == 'OBZH_know':
 				for a in OBZH:
-					bot.send_message(call.message.chat.id, a)
-			elif call.data == 'SK_MAT_know':
-				for a in SK_MAT:
-					bot.send_message(call.message.chat.id, a)
-			elif call.data == 'TECHNOLOGY_know':
-				for a in TECHNOLOGY:
 					bot.send_message(call.message.chat.id, a)
 			elif call.data == 'ENGLISH_1_know':
 				for a in ENGLISH_1:
@@ -276,11 +249,6 @@ def music(message):
 	MUS.append(val)
 	bot.send_message(message.chat.id, 'Готово')
 
-def iso(message):
-	val = message.text
-	ISO.append(val)
-	bot.send_message(message.chat.id, 'Готово')
-
 def informatica(message):
 	val = message.text
 	INFORM.append(val)
@@ -289,16 +257,6 @@ def informatica(message):
 def obzh(message):
 	val = message.text
 	OBZH.append(val)
-	bot.send_message(message.chat.id, 'Готово')
-
-def sk_mat(message):
-	val = message.text
-	SK_MAT.append(val)
-	bot.send_message(message.chat.id, 'Готово')
-
-def TECHNOLOGY(message):
-	val = message.text
-	TECHNOLOGY.append(val)
 	bot.send_message(message.chat.id, 'Готово')
 
 def english_1(message):
